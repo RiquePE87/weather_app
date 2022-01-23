@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/models/weatherry.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Weather? weather;
-
     return Scaffold(
       backgroundColor: Color.fromARGB(100, 9, 11, 53),
       bottomNavigationBar: BottomNavigationBar(
