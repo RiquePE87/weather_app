@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/provider/weather_provider.dart';
+import 'package:weather_app/screens/widgets/hour_fore_card.dart';
+import 'package:weather_app/screens/widgets/info_column.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final weatherProvider = Provider.of<WeatherProvider>(context);
+
     return Scaffold(
       backgroundColor: Color.fromARGB(100, 9, 11, 53),
       bottomNavigationBar: BottomNavigationBar(
@@ -40,95 +46,98 @@ class MainScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Center(
-                child: Text(
-                  "Location",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              Center(
-                child: Text(
-                  "DateTime",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-              Image(
-                image: AssetImage("images/thunderstorm.png"),
-                width: 200,
-                height: 200,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Text("Temp",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500)),
-                      Text("32",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800))
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text("Wind",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500)),
-                      Text("100km/h",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800))
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text("Humidity",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500)),
-                      Text("90%",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800))
-                    ],
-                  ),
-                ],
-              ),
-              Row(
+        child: Consumer<WeatherProvider>(
+          builder: (context, provider, child) {
+            return weatherProvider.weather != null ? Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Today',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500)),
-                  Text('View full report',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500))
+                  Center(
+                    child: Consumer<WeatherProvider>(
+                      builder: (context, provider, child) {
+                        return Text(
+                          weatherProvider.weather!.location!.name.toString(),
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        );
+                      },
+                    ),
+                  ),
+                  Center(
+                    child: Consumer<WeatherProvider>(
+                      builder: (context, provider, child) {
+                        return Text(
+                          weatherProvider.weather!.location!.localtime
+                              .toString(),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500),
+                        );
+                      },
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.blue
+                    ),
+                    width: 120,
+                    height: 40,
+                    child: Center(child: Text(
+                        "Forecast", style: TextStyle(color: Colors.white))),
+                  ),
+                  Image(
+                    image: AssetImage("images/thunderstorm.png"),
+                    width: 200,
+                    height: 200,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Consumer<WeatherProvider>(
+                        builder: (context, provider, child) {
+                          return InfoColumn(title: "Temp",
+                              data: "${weatherProvider.weather!.current!
+                                  .temperatureC.toString()}ªC");
+                        },
+                      ),
+                      Consumer<WeatherProvider>(
+                        builder: (context, provider, child) {
+                          return InfoColumn(title: "Wind",
+                              data: "${weatherProvider.weather!.current!.windKph
+                                  .toString()} km/h");
+                        },
+                      ),
+                      Consumer<WeatherProvider>(
+                        builder: (context, provider, child) {
+                          return InfoColumn(title: "Humidity",
+                              data: "${weatherProvider.weather!.current!
+                                  .humidity
+                                  .toString()}%");
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Today',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500)),
+                      Text('View full report',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500))
+                    ],
+                  ),
                 ],
-              )
-            ],
-          ),
+              ),
+            ) : Container(child: Center(child: CircularProgressIndicator(),),);
+          },
         ),
       ),
     );
