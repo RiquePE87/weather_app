@@ -16,29 +16,17 @@ class HourByHourForecast extends StatelessWidget {
 
     return Consumer<WeatherProvider>(
       builder: (context, provider, child) {
-        return ListView.builder(
-            itemCount: weatherProvider.weather!.forecast!.forecasts!.length,
-            itemBuilder: (_, index) {
-              return HourForeCard();
-            });
+        return SizedBox(
+          height: 80,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: weatherProvider.hourList!.length,
+              itemBuilder: (_, index) {
+                return HourForeCard(day: weatherProvider.forecastDay!.day, hour: weatherProvider.hourList![index]);
+              }),
+        );
       },
     );
-  }
-  List<Hour>? setHourList(Weather weather, int dateEpoch){
-
-    List<ForecastDay>? forecasts = weather.forecast!.forecasts;
-    List<Hour>? hours;
-
-
-
-    DateTime actualDate = new DateTime.fromMillisecondsSinceEpoch(weather.location!.localtimeEpoch!);
-    DateTime forecastDate = new DateTime.fromMillisecondsSinceEpoch(dateEpoch);
-
-    if (actualDate.isAtSameMomentAs(forecastDate)){
-
-    }
-
-    return hours;
   }
 }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:weather_app/models/weather.dart';
+import 'package:weather_app/repository/condition.dart';
 
 class Repository {
   final String urlBase = "http://api.weatherapi.com/v1/forecast.json?key=";
@@ -31,5 +32,9 @@ class Repository {
       print(ex);
       return null;
     }
+  }
+  Map setCondition(){
+    var conditions = json.decode(CONDITIONS);
+   return conditions;
   }
 }

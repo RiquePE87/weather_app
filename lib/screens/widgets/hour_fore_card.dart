@@ -16,7 +16,7 @@ class HourForeCard extends StatelessWidget {
     return Container(
       child: Row(
         children: [
-          Image(image: AssetImage("images/weather/64x64/${hour!.isDay! ? "day" : "night"}/${day!.condition!.code}.png"),),
+          Image.network(day!.condition!.icon.toString()),
           Column(
             children: [
               Text("${hour!.time}", style: TextStyle(

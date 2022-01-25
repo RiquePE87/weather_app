@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
+import 'package:weather_app/screens/widgets/hour_by_hour_forecast.dart';
 import 'package:weather_app/screens/widgets/hour_fore_card.dart';
 import 'package:weather_app/screens/widgets/info_column.dart';
 
@@ -134,6 +135,7 @@ class MainScreen extends StatelessWidget {
                               fontWeight: FontWeight.w500))
                     ],
                   ),
+                  HourByHourForecast()
                 ],
               ),
             ) : Container(child: Center(child: CircularProgressIndicator(),),);
