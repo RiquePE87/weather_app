@@ -4,6 +4,7 @@ import 'package:weather_app/provider/weather_provider.dart';
 import 'package:weather_app/screens/widgets/hour_by_hour_forecast.dart';
 import 'package:weather_app/screens/widgets/hour_fore_card.dart';
 import 'package:weather_app/screens/widgets/info_column.dart';
+import 'package:weather_app/screens/widgets/weather_icon.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -88,11 +89,7 @@ class MainScreen extends StatelessWidget {
                     child: Center(child: Text(
                         "Forecast", style: TextStyle(color: Colors.white))),
                   ),
-                  Image(
-                    image: AssetImage("images/thunderstorm.png"),
-                    width: 200,
-                    height: 200,
-                  ),
+                  WeatherIcon(weatherProvider.weather!.current!.condition, weatherProvider.weather!.current!.isDay!),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -100,7 +97,7 @@ class MainScreen extends StatelessWidget {
                         builder: (context, provider, child) {
                           return InfoColumn(title: "Temp",
                               data: "${weatherProvider.weather!.current!
-                                  .temperatureC.toString()}ªC");
+                                  .temperatureC!.round().toString()}ªC");
                         },
                       ),
                       Consumer<WeatherProvider>(
@@ -120,20 +117,23 @@ class MainScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Today',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500)),
-                      Text('View full report',
-                          style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500))
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8,0,8,0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Today',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500)),
+                        Text('View full report',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500))
+                      ],
+                    ),
                   ),
                   HourByHourForecast()
                 ],

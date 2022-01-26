@@ -22,7 +22,8 @@ class HourByHourForecast extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: weatherProvider.hourList!.length,
               itemBuilder: (_, index) {
-                return HourForeCard(day: weatherProvider.forecastDay!.day, hour: weatherProvider.hourList![index]);
+                return HourForeCard(day: weatherProvider.forecastDay!.day,
+                  hour: weatherProvider.hourList![index]);
               }),
         );
       },

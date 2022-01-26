@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:weather_app/models/day.dart';
+import 'package:weather_app/models/hour.dart';
 import 'package:weather_app/models/weather.dart';
 import 'package:weather_app/repository/condition.dart';
 
@@ -33,8 +35,20 @@ class Repository {
       return null;
     }
   }
-  Map setCondition(){
+  setCondition(){
     var conditions = json.decode(CONDITIONS);
    return conditions;
+  }
+
+  String? setConitionIcon({Day? day, Hour? hour}) {
+    var conditions = Repository().setCondition();
+    String? icon;
+    conditions!.forEach((element) {
+      if (element["code"] == day!.condition!.code) {
+        icon =
+        "images/weather/64x64/${hour!.isDay! ? "day" : "night"}/${element["icon"]}.png";
+      }
+    });
+    return icon;
   }
 }

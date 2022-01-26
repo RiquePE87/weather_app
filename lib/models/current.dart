@@ -1,10 +1,12 @@
+import 'condition.dart';
+
 class Current {
   int? lastUpdatedEpoch;
   String? lastUpdated;
   double? temperatureC;
   double? temperatureF;
   bool? isDay;
-  Map<String, dynamic>? condition;
+  Condition? condition;
   double? windMph;
   double? windKph;
   int? windDegree;
@@ -36,7 +38,9 @@ class Current {
     this.temperatureC = json["temp_c"];
     this.temperatureF = json["temp_f"];
     this.isDay = json["is_day"] == 1 ? true : false;
-    this.condition = json["condition"];
+    this.condition = json['condition'] != null
+        ? new Condition.fromJson(json['condition'])
+        : null;
     this.windMph = json["wind_mph"];
     this.windKph = json["wind_kph"];
     this.windDegree = json["wind_degree"];
