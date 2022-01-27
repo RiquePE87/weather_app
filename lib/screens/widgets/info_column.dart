@@ -14,12 +14,12 @@ class InfoColumn extends StatelessWidget {
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 12,
-                fontWeight: FontWeight.w500)),
+                fontWeight: FontWeight.w300)),
         Text(data!,
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
-                fontWeight: FontWeight.w800))
+                fontWeight: FontWeight.w400))
       ],
     );
   }

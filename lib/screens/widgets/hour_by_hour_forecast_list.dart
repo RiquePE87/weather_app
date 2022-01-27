@@ -7,7 +7,7 @@ import 'package:weather_app/provider/weather_provider.dart';
 
 import 'hour_fore_card.dart';
 
-class HourByHourForecast extends StatelessWidget {
+class HourByHourForecastList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
