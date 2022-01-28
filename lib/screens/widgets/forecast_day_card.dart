@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/models/forecast_day.dart';
+import 'package:weather_app/screens/widgets/weather_icon.dart';
 
 class ForecastDayCard extends StatelessWidget {
+  ForecastDayCard(this.forecastDay);
+
+  ForecastDay forecastDay;
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +15,7 @@ class ForecastDayCard extends StatelessWidget {
         children: [
           Column(
             children: [
-              Text("WeekDay",
+              Text(forecastDay.date.toString(),
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -22,13 +27,13 @@ class ForecastDayCard extends StatelessWidget {
                       fontWeight: FontWeight.w400))
             ],
           ),
-          Text("32ºC",
+          Text("${forecastDay.day!.avgtempC!.round()}ºC",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 22,
-                  fontWeight: FontWeight.w400))
+                  fontWeight: FontWeight.w400)),
+          WeatherIcon(forecastDay.day!.condition, true, 0.8)
         ],
-
       ),
     );
   }

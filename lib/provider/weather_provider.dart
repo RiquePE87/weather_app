@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/models/day.dart';
 import 'package:weather_app/models/forecast_day.dart';
 import 'package:weather_app/models/hour.dart';
 import 'package:weather_app/models/weather.dart';
@@ -12,12 +11,12 @@ class WeatherProvider with ChangeNotifier {
   List<Map>? conditions;
 
   WeatherProvider() {
-    getLocationWeather("Petrolina");
+    getLocationWeather("Recife");
   }
 
   void getLocationWeather(String location) {
     Repository()
-        .fetchWeather(location, 1)
+        .fetchWeather(location, 7)
         .then((value) => weather = value)
         .whenComplete(() {
       setHourList();

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/provider/weather_provider.dart';
 import 'package:weather_app/screens/widgets/forecast_day_list.dart';
 import 'package:weather_app/screens/widgets/hour_by_hour_forecast_list.dart';
 
@@ -10,9 +12,9 @@ class ForecastRepostScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           gradient: RadialGradient(colors: [
-            Color.fromARGB(100, 9, 80, 135),
-            Color.fromARGB(100, 9, 11, 53),
-          ], center: Alignment(0.8, -1.0), radius: 0.9)),
+        Color.fromARGB(100, 9, 80, 135),
+        Color.fromARGB(100, 9, 11, 53),
+      ], center: Alignment(0.8, -1.0), radius: 0.9)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -20,12 +22,16 @@ class ForecastRepostScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 50),
-              child: Text(
-                "weatherProvider.weather!.location!.name".toString(),
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600),
+              child: Consumer<WeatherProvider>(
+                builder: (context, provider, child) {
+                  return Text(
+                    provider.weather!.location!.name.toString(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600),
+                  );
+                },
               ),
             ),
             Row(
@@ -36,11 +42,18 @@ class ForecastRepostScreen extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w500)),
-                Text('January, 27 2022',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500)),
+                Consumer<WeatherProvider>(
+                  builder: (context, provider, child) {
+                    return Text(
+                        provider.weather!.current!.lastUpdated
+                            .toString()
+                            .substring(0, 10),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500));
+                  },
+                ),
               ],
             ),
             HourByHourForecastList(),
@@ -52,10 +65,17 @@ class ForecastRepostScreen extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w500)),
-                Icon(Icons.calendar_today_rounded, color: Colors.white,)
+                Icon(
+                  Icons.calendar_today_rounded,
+                  color: Colors.white,
+                )
               ],
             ),
-            ForecastDayList()
+            Consumer<WeatherProvider>(
+              builder: (context, provider, child) {
+                return ForecastDayList(provider.weather!.forecast!.forecasts);
+              },
+            )
           ],
         ),
       ),

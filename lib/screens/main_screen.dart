@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/provider/main_screen_provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
 import 'package:weather_app/screens/widgets/hour_by_hour_forecast_list.dart';
 import 'package:weather_app/screens/widgets/info_column.dart';
@@ -11,40 +12,47 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final weatherProvider = Provider.of<WeatherProvider>(context);
+    final mainScreenProvider = Provider.of<MainScreenProvider>(context);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-              label: "",
-              backgroundColor: Color.fromARGB(100, 9, 11, 53),
-              icon: Icon(
-                Icons.home_filled,
-                color: Colors.white,
-              )),
-          BottomNavigationBarItem(
-              label: "",
-              backgroundColor: Color.fromARGB(100, 9, 11, 53),
-              icon: Icon(
-                Icons.search_rounded,
-                color: Colors.white,
-              )),
-          BottomNavigationBarItem(
-              label: "",
-              backgroundColor: Color.fromARGB(100, 9, 11, 53),
-              icon: Icon(
-                Icons.insert_chart_outlined_rounded,
-                color: Colors.white,
-              )),
-          BottomNavigationBarItem(
-              label: "",
-              backgroundColor: Color.fromARGB(100, 9, 11, 53),
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-              )),
-        ],
+      bottomNavigationBar: Consumer<MainScreenProvider>(
+        builder: (context, provider, child) {
+          return BottomNavigationBar(
+            onTap: mainScreenProvider.onItemTapped,
+            currentIndex: mainScreenProvider.selectedIndex,
+            items: [
+              BottomNavigationBarItem(
+                  label: "",
+                  backgroundColor: Color.fromARGB(100, 9, 11, 53),
+                  icon: Icon(
+                    Icons.home_filled,
+                    color: Colors.white,
+                  )),
+              BottomNavigationBarItem(
+                  label: "",
+                  backgroundColor: Color.fromARGB(100, 9, 11, 53),
+                  icon: Icon(
+                    Icons.search_rounded,
+                    color: Colors.white,
+                  )),
+              BottomNavigationBarItem(
+                  label: "",
+                  backgroundColor: Color.fromARGB(100, 9, 11, 53),
+                  icon: Icon(
+                    Icons.insert_chart_outlined_rounded,
+                    color: Colors.white,
+                  )),
+              BottomNavigationBarItem(
+                  label: "",
+                  backgroundColor: Color.fromARGB(100, 9, 11, 53),
+                  icon: Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                  )),
+            ],
+          );
+        },
       ),
       body: Consumer<WeatherProvider>(
         builder: (context, provider, child) {
@@ -68,7 +76,9 @@ class MainScreen extends StatelessWidget {
                                 weatherProvider.weather!.location!.name
                                     .toString(),
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 25, fontWeight: FontWeight.w600),
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600),
                               ),
                             );
                           },
@@ -99,7 +109,7 @@ class MainScreen extends StatelessWidget {
                                 style: TextStyle(color: Colors.white))),
                       ),
                       WeatherIcon(weatherProvider.weather!.current!.condition,
-                          weatherProvider.weather!.current!.isDay!),
+                          weatherProvider.weather!.current!.isDay!, 0.4),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
