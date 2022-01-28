@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:weather_app/Services/condition.dart';
 import 'package:weather_app/models/day.dart';
 import 'package:weather_app/models/hour.dart';
 import 'package:weather_app/models/weather.dart';
-import 'package:weather_app/repository/condition.dart';
 
-class Repository {
+class WeatherService {
   final String urlBase = "http://api.weatherapi.com/v1/forecast.json?key=";
   final String key = "4611193cd03d47fb977132900222201";
 
@@ -41,7 +41,7 @@ class Repository {
   }
 
   String? setConitionIcon({Day? day, Hour? hour}) {
-    var conditions = Repository().setCondition();
+    var conditions = WeatherService().setCondition();
     String? icon;
     conditions!.forEach((element) {
       if (element["code"] == day!.condition!.code) {

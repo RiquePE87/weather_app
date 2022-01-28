@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/Services/weather_service.dart';
 import 'package:weather_app/models/condition.dart';
-import 'package:weather_app/repository/repository.dart';
 
 class WeatherIcon extends StatelessWidget {
   WeatherIcon(this.condition, this.isDay, this.scale);
@@ -18,7 +18,7 @@ class WeatherIcon extends StatelessWidget {
   }
 
   setWeatherIcon() {
-    var conditions = Repository().setCondition();
+    var conditions = WeatherService().setCondition();
     String? icon;
     conditions!.forEach((element) {
       if (element["code"] == condition!.code) {

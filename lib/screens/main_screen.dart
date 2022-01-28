@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/provider/main_screen_provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
+import 'package:weather_app/screens/widgets/bottom_navigation.dart';
 import 'package:weather_app/screens/widgets/hour_by_hour_forecast_list.dart';
 import 'package:weather_app/screens/widgets/info_column.dart';
 import 'package:weather_app/screens/widgets/weather_icon.dart';
@@ -18,40 +19,7 @@ class MainScreen extends StatelessWidget {
       backgroundColor: Colors.transparent,
       bottomNavigationBar: Consumer<MainScreenProvider>(
         builder: (context, provider, child) {
-          return BottomNavigationBar(
-            onTap: mainScreenProvider.onItemTapped,
-            currentIndex: mainScreenProvider.selectedIndex,
-            items: [
-              BottomNavigationBarItem(
-                  label: "",
-                  backgroundColor: Color.fromARGB(100, 9, 11, 53),
-                  icon: Icon(
-                    Icons.home_filled,
-                    color: Colors.white,
-                  )),
-              BottomNavigationBarItem(
-                  label: "",
-                  backgroundColor: Color.fromARGB(100, 9, 11, 53),
-                  icon: Icon(
-                    Icons.search_rounded,
-                    color: Colors.white,
-                  )),
-              BottomNavigationBarItem(
-                  label: "",
-                  backgroundColor: Color.fromARGB(100, 9, 11, 53),
-                  icon: Icon(
-                    Icons.insert_chart_outlined_rounded,
-                    color: Colors.white,
-                  )),
-              BottomNavigationBarItem(
-                  label: "",
-                  backgroundColor: Color.fromARGB(100, 9, 11, 53),
-                  icon: Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  )),
-            ],
-          );
+          return BottomNavigation(mainScreenProvider: provider);
         },
       ),
       body: Consumer<WeatherProvider>(

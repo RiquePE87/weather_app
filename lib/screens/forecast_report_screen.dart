@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/provider/main_screen_provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
+import 'package:weather_app/screens/widgets/bottom_navigation.dart';
 import 'package:weather_app/screens/widgets/forecast_day_list.dart';
 import 'package:weather_app/screens/widgets/hour_by_hour_forecast_list.dart';
 
@@ -12,13 +14,18 @@ class ForecastRepostScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           gradient: RadialGradient(colors: [
-        Color.fromARGB(100, 9, 80, 135),
-        Color.fromARGB(100, 9, 11, 53),
-      ], center: Alignment(0.8, -1.0), radius: 0.9)),
+            Color.fromARGB(100, 9, 80, 135),
+            Color.fromARGB(100, 9, 11, 53),
+          ], center: Alignment(0.8, -1.0), radius: 0.9)),
       child: Scaffold(
+        bottomNavigationBar: Consumer<MainScreenProvider>(
+          builder: (context, provider, child) {
+            return BottomNavigation(mainScreenProvider: provider,);
+          },
+        ),
         backgroundColor: Colors.transparent,
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 50),

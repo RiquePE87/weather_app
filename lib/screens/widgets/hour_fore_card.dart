@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/models/condition.dart';
+import 'package:weather_app/Services/weather_service.dart';
 import 'package:weather_app/models/day.dart';
 import 'package:weather_app/models/hour.dart';
-import 'package:weather_app/repository/repository.dart';
 
 class HourForeCard extends StatelessWidget {
 
@@ -14,7 +13,7 @@ class HourForeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? icon = Repository().setConitionIcon(day: day, hour: hour);
+    String? icon = WeatherService().setConitionIcon(day: day, hour: hour);
     return Container(
       margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
       padding: EdgeInsets.all(10),
