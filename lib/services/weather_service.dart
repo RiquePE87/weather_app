@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:weather_app/Services/condition.dart';
 import 'package:weather_app/models/day.dart';
@@ -27,11 +26,15 @@ class WeatherService {
     Weather? weather;
     var response;
     try {
-      await _getHttp(city, days).then((value) => response = value);
+      await _getHttp(city, days).then((value) => response = value).onError((error, stackTrace) => true);
       weather = Weather.fromJson(jsonDecode(response.toString()));
-      return weather;
+      if (response != null){
+        return weather;
+      }
+      else{
+        throw Exception("Cannot fetch weather data");
+      }
     } catch (ex) {
-      print(ex);
       return null;
     }
   }

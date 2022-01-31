@@ -18,11 +18,6 @@ class ForecastRepostScreen extends StatelessWidget {
             Color.fromARGB(100, 9, 11, 53),
           ], center: Alignment(0.8, -1.0), radius: 0.9)),
       child: Scaffold(
-        bottomNavigationBar: Consumer<MainScreenProvider>(
-          builder: (context, provider, child) {
-            return BottomNavigation(mainScreenProvider: provider,);
-          },
-        ),
         backgroundColor: Colors.transparent,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

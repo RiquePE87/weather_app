@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_app/Services/repository.dart';
 import 'package:weather_app/models/weather.dart';
+import 'package:weather_app/services/weather_service.dart';
 
 main() {
   test("test if returns the json", () async {

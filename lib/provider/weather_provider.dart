@@ -9,6 +9,7 @@ class WeatherProvider with ChangeNotifier {
   List<Hour>? hourList;
   ForecastDay? forecastDay;
   List<Map>? conditions;
+  bool? hasError;
 
   WeatherProvider() {
     getLocationWeather("Recife");

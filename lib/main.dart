@@ -4,6 +4,7 @@ import 'package:weather_app/provider/main_screen_provider.dart';
 import 'package:weather_app/Services/navigation_service.dart';
 import 'package:weather_app/provider/weather_provider.dart';
 import 'package:weather_app/screens/main_screen.dart';
+import 'package:weather_app/screens/widgets/app_pageview.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: NavigationService.navigatorKey,
       title: 'Material App',
-      home: MainScreen(),
+      home: AppPageView(),
     );
   }
 }

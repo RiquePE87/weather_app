@@ -16,12 +16,7 @@ class MainScreen extends StatelessWidget {
     final mainScreenProvider = Provider.of<MainScreenProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      bottomNavigationBar: Consumer<MainScreenProvider>(
-        builder: (context, provider, child) {
-          return BottomNavigation(mainScreenProvider: provider);
-        },
-      ),
+      //backgroundColor: Colors.transparent,
       body: Consumer<WeatherProvider>(
         builder: (context, provider, child) {
           return weatherProvider.weather != null
@@ -131,6 +126,7 @@ class MainScreen extends StatelessWidget {
                 )
               : Container(
                   child: Center(
+
                     child: CircularProgressIndicator(),
                   ),
                 );
