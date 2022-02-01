@@ -14,11 +14,11 @@ class ForecastRepostScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           gradient: RadialGradient(colors: [
-            Color.fromARGB(100, 9, 80, 135),
-            Color.fromARGB(100, 9, 11, 53),
+            Color.fromARGB(255, 9, 80, 135),
+            Color.fromARGB(255, 9, 11, 53),
           ], center: Alignment(0.8, -1.0), radius: 0.9)),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromARGB(255, 9, 11, 53),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

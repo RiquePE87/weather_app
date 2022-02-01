@@ -8,23 +8,21 @@ import 'package:weather_app/screens/widgets/info_column.dart';
 import 'package:weather_app/screens/widgets/weather_icon.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final weatherProvider = Provider.of<WeatherProvider>(context);
-    final mainScreenProvider = Provider.of<MainScreenProvider>(context);
 
     return Scaffold(
-      //backgroundColor: Colors.transparent,
+      backgroundColor: Colors.transparent,
       body: Consumer<WeatherProvider>(
         builder: (context, provider, child) {
           return weatherProvider.weather != null
               ? Container(
                   decoration: BoxDecoration(
                       gradient: RadialGradient(colors: [
-                    Color.fromARGB(100, 9, 80, 135),
-                    Color.fromARGB(100, 9, 11, 53),
+                    Color.fromARGB(255, 9, 80, 135),
+                    Color.fromARGB(255, 9, 11, 53),
                   ], center: Alignment(0.8, -1.0), radius: 0.9)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,

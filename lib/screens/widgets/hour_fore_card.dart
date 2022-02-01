@@ -19,7 +19,7 @@ class HourForeCard extends StatelessWidget {
       padding: EdgeInsets.all(10),
       width: 120,
       decoration: BoxDecoration(
-        color: hour!.isDay! ? Colors.blue : Colors.blue.shade900,
+        color: hour!.isDay! ? Color.fromARGB(255, 26, 134,230) : Color.fromARGB(255, 16, 18, 48),
         borderRadius: BorderRadius.circular(10),
         //border: Border.symmetric(vertical: BorderSide(style: BorderStyle.solid))
       ),

@@ -9,6 +9,9 @@ class BottomNavigation extends StatelessWidget {
     return Consumer<MainScreenProvider>(
       builder: (context, provider, child) {
         return BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          fixedColor: Color.fromARGB(255, 9, 11, 53),
+          backgroundColor: Color.fromARGB(255, 9, 11, 53),
           onTap: provider.onItemTapped,
           currentIndex: provider.selectedIndex,
           items: [

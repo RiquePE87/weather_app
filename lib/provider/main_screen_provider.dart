@@ -5,13 +5,14 @@ import 'package:weather_app/screens/main_screen.dart';
 
 class MainScreenProvider with ChangeNotifier {
   int selectedIndex = 0;
-  final PageController pageController = PageController(
-      initialPage: 0, keepPage: true);
+  final PageController pageController = PageController();
 
   void onItemTapped(int index) {
     selectedIndex = index;
     notifyListeners();
-    pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+    //pageController.animateToPage(page, duration: duration, curve: curve)
+    pageController.jumpToPage(index);
+
 
 
     /*switch (index) {

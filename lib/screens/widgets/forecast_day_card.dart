@@ -10,6 +10,12 @@ class ForecastDayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 16, 18, 48),
+        borderRadius: BorderRadius.circular(10)
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
