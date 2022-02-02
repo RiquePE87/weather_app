@@ -5,28 +5,20 @@ import 'package:weather_app/screens/main_screen.dart';
 
 class MainScreenProvider with ChangeNotifier {
   int selectedIndex = 0;
+  int selectedPanel = 0;
   final PageController pageController = PageController();
+  final PageController panelController = PageController();
 
   void onItemTapped(int index) {
     selectedIndex = index;
     notifyListeners();
     //pageController.animateToPage(page, duration: duration, curve: curve)
     pageController.jumpToPage(index);
+  }
 
-
-
-    /*switch (index) {
-      case 0:
-        Navigator.push((NavigationService.navigatorKey.currentContext!),
-            MaterialPageRoute(builder: (_) => MainScreen()));
-        break;
-      case 2:
-        Navigator.push((NavigationService.navigatorKey.currentContext!),
-            MaterialPageRoute(builder: (_) => ForecastRepostScreen()));
-        break;
-      case 3:
-        break;
-    }*/
-
+  void onPanelTap(int index){
+    selectedPanel = index;
+    notifyListeners();
+    panelController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.ease);
   }
 }

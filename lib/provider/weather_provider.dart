@@ -24,6 +24,7 @@ class WeatherProvider with ChangeNotifier {
           .whenComplete(() {
         setHourList();
         addLocation();
+        SnackBar(content: Text("Location changed to ${weather!.location!.name}"));
         notifyListeners();
       });
     }

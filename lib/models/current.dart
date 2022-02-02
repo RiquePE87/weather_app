@@ -1,3 +1,5 @@
+import 'package:weather_app/models/air_quality.dart';
+
 import 'condition.dart';
 
 class Current {
@@ -24,6 +26,7 @@ class Current {
   double? uv;
   double? gustMph;
   double? gustKph;
+  AirQuality? airQuality;
 
   @override
   String toString() {
@@ -58,5 +61,6 @@ class Current {
     this.uv = json["uv"];
     this.gustMph = json["gust_mph"];
     this.gustKph = json["gust_kph"];
+    this.airQuality = AirQuality.fromJson(json["air_quality"]);
   }
 }

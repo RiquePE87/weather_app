@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/provider/main_screen_provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
+import 'package:weather_app/screens/widgets/air_quality_panel.dart';
 import 'package:weather_app/screens/widgets/hour_by_hour_forecast_list.dart';
 import 'package:weather_app/screens/widgets/info_column.dart';
 import 'package:weather_app/screens/widgets/weather_icon.dart';
+import 'package:weather_app/screens/widgets/weather_panel.dart';
 
 class MainScreen extends StatelessWidget {
   @override
@@ -55,62 +58,75 @@ class MainScreen extends StatelessWidget {
                           },
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue),
-                            width: 120,
-                            height: 40,
-                            child: Center(
-                                child: Text("Forecast",
-                                    style: TextStyle(color: Colors.white))),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color.fromARGB(255, 16, 18, 48)),
-                            width: 120,
-                            height: 40,
-                            child: Center(
-                                child: Text("Air quality",
-                                    style: TextStyle(color: Colors.white))),
-                          ),
-                        ],
+                      Consumer<MainScreenProvider>(
+                        builder: (context, provider, child) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  provider.onPanelTap(0);
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(right: 8),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: provider.selectedPanel == 0
+                                          ? Colors.blue
+                                          : Color.fromARGB(255, 16, 18, 48)),
+                                  width: 120,
+                                  height: 40,
+                                  child: Center(
+                                      child: Text("Forecast",
+                                          style:
+                                              TextStyle(color: Colors.white))),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  provider.onPanelTap(1);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: provider.selectedPanel == 1
+                                          ? Colors.blue
+                                          : Color.fromARGB(255, 16, 18, 48)),
+                                  width: 120,
+                                  height: 40,
+                                  child: Center(
+                                      child: Text("Air quality",
+                                          style:
+                                              TextStyle(color: Colors.white))),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
                       ),
-                      WeatherIcon(weatherProvider.weather!.current!.condition,
-                          weatherProvider.weather!.current!.isDay!, 0.4),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Consumer<WeatherProvider>(
-                            builder: (context, provider, child) {
-                              return InfoColumn(
-                                  title: "Temp",
-                                  data:
-                                      "${weatherProvider.weather!.current!.temperatureC!.round().toString()}ªC");
-                            },
-                          ),
-                          Consumer<WeatherProvider>(
-                            builder: (context, provider, child) {
-                              return InfoColumn(
-                                  title: "Wind",
-                                  data:
-                                      "${weatherProvider.weather!.current!.windKph.toString()} km/h");
-                            },
-                          ),
-                          Consumer<WeatherProvider>(
-                            builder: (context, provider, child) {
-                              return InfoColumn(
-                                  title: "Humidity",
-                                  data:
-                                      "${weatherProvider.weather!.current!.humidity.toString()}%");
-                            },
-                          ),
-                        ],
+                      Consumer<MainScreenProvider>(
+                        builder: (context, provider, child) {
+                          return Container(
+                            width: 300,
+                            height: 250,
+                            child: PageView(
+                              physics: NeverScrollableScrollPhysics(),
+                              controller: provider.panelController,
+                              children: [
+                                Consumer<WeatherProvider>(
+                                  builder: (context, provider, child) {
+                                    return WeatherPanel(provider.weather!);
+                                  },
+                                ),
+                                Consumer<WeatherProvider>(
+                                  builder: (context, provider, child) {
+                                    return AirQualityPanel(provider.weather!);
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),

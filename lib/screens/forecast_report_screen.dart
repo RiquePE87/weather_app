@@ -36,42 +36,48 @@ class ForecastRepostScreen extends StatelessWidget {
                 },
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Today',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500)),
-                Consumer<WeatherProvider>(
-                  builder: (context, provider, child) {
-                    return Text(
-                        provider.weather!.current!.lastUpdated
-                            .toString()
-                            .substring(0, 10),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500));
-                  },
-                ),
-              ],
+            Padding(
+              padding:const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Today',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500)),
+                  Consumer<WeatherProvider>(
+                    builder: (context, provider, child) {
+                      return Text(
+                          provider.weather!.current!.lastUpdated
+                              .toString()
+                              .substring(0, 10),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500));
+                    },
+                  ),
+                ],
+              ),
             ),
             HourByHourForecastList(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Next Forecast',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500)),
-                Icon(
-                  Icons.calendar_today_rounded,
-                  color: Colors.white,
-                )
-              ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Next Forecast',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500)),
+                  Icon(
+                    Icons.calendar_today_rounded,
+                    color: Colors.white,
+                  )
+                ],
+              ),
             ),
             Consumer<WeatherProvider>(
               builder: (context, provider, child) {
