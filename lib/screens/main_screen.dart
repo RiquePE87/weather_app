@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/provider/main_screen_provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
-import 'package:weather_app/screens/widgets/bottom_navigation.dart';
 import 'package:weather_app/screens/widgets/hour_by_hour_forecast_list.dart';
 import 'package:weather_app/screens/widgets/info_column.dart';
 import 'package:weather_app/screens/widgets/weather_icon.dart';
 
 class MainScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final weatherProvider = Provider.of<WeatherProvider>(context);
@@ -34,8 +31,7 @@ class MainScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.only(top: 50),
                               child: Text(
-                                weatherProvider.weather!.location!.name
-                                    .toString(),
+                                "${weatherProvider.weather!.location!.name.toString()}, ${weatherProvider.weather!.location!.region.toString()}",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 25,
@@ -59,15 +55,31 @@ class MainScreen extends StatelessWidget {
                           },
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.blue),
-                        width: 120,
-                        height: 40,
-                        child: Center(
-                            child: Text("Forecast",
-                                style: TextStyle(color: Colors.white))),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.blue),
+                            width: 120,
+                            height: 40,
+                            child: Center(
+                                child: Text("Forecast",
+                                    style: TextStyle(color: Colors.white))),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Color.fromARGB(255, 16, 18, 48)),
+                            width: 120,
+                            height: 40,
+                            child: Center(
+                                child: Text("Air quality",
+                                    style: TextStyle(color: Colors.white))),
+                          ),
+                        ],
                       ),
                       WeatherIcon(weatherProvider.weather!.current!.condition,
                           weatherProvider.weather!.current!.isDay!, 0.4),
@@ -124,7 +136,6 @@ class MainScreen extends StatelessWidget {
                 )
               : Container(
                   child: Center(
-
                     child: CircularProgressIndicator(),
                   ),
                 );

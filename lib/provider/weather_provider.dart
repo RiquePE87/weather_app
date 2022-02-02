@@ -10,19 +10,23 @@ class WeatherProvider with ChangeNotifier {
   ForecastDay? forecastDay;
   List<Map>? conditions;
   bool? hasError;
+  List<Weather>? searchList = [];
 
   WeatherProvider() {
     getLocationWeather("Recife");
   }
 
   void getLocationWeather(String location) {
-    WeatherService()
-        .fetchWeather(location, 7)
-        .then((value) => weather = value)
-        .whenComplete(() {
-      setHourList();
-      notifyListeners();
-    });
+    if (location.isNotEmpty) {
+      WeatherService()
+          .fetchWeather(location, 7)
+          .then((value) => weather = value)
+          .whenComplete(() {
+        setHourList();
+        addLocation();
+        notifyListeners();
+      });
+    }
   }
 
   void setHourList() {
@@ -38,5 +42,15 @@ class WeatherProvider with ChangeNotifier {
         hourList = element.hour;
       }
     });
+  }
+
+  void addLocation() {
+    searchList!.add(weather!);
+    notifyListeners();
+  }
+
+  void removeLocation(Weather weather) {
+    searchList!.remove(weather);
+    notifyListeners();
   }
 }
