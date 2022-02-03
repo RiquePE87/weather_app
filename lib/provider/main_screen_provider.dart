@@ -5,9 +5,14 @@ import 'package:weather_app/screens/main_screen.dart';
 
 class MainScreenProvider with ChangeNotifier {
   int selectedIndex = 0;
-  int selectedPanel = 0;
+  int? selectedPanel = 0;
+  PageController? panelController;
+
+  MainScreenProvider(){
+    panelController = PageController(keepPage: true, initialPage: selectedIndex);
+  }
   final PageController pageController = PageController();
-  final PageController panelController = PageController();
+
 
   void onItemTapped(int index) {
     selectedIndex = index;
@@ -18,7 +23,7 @@ class MainScreenProvider with ChangeNotifier {
 
   void onPanelTap(int index){
     selectedPanel = index;
+    panelController!.animateToPage(selectedPanel!, duration: Duration(milliseconds: 300), curve: Curves.ease);
     notifyListeners();
-    panelController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.ease);
   }
 }

@@ -4,13 +4,17 @@ import 'package:weather_app/screens/widgets/weather_icon.dart';
 
 class LocationWeatherCard extends StatelessWidget {
   Weather weather;
+  bool isSelected;
 
-  LocationWeatherCard(this.weather);
+  LocationWeatherCard(this.weather, this.isSelected);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        boxShadow: [
+          isSelected ? BoxShadow(color: Colors.white, blurRadius: 3, spreadRadius: 3) : BoxShadow()
+        ],
           color: weather.current!.isDay!
               ? Color.fromARGB(255, 26, 134, 230)
               : Color.fromARGB(255, 16, 18, 48),

@@ -50,8 +50,21 @@ class WeatherProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeLocation(Weather weather) {
-    searchList!.remove(weather);
+  void removeLocation(Weather w) {
+    searchList!.remove(w);
     notifyListeners();
+  }
+
+  void setLocation(Weather w){
+    weather = searchList!.firstWhere((element) => element == w);
+    notifyListeners();
+  }
+
+  bool isSelectedWeather(Weather w){
+    if (w == weather){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

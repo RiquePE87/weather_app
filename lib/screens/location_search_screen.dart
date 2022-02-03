@@ -92,12 +92,16 @@ class LocationSearchScreen extends StatelessWidget {
                                 childAspectRatio: 1.3, crossAxisCount: 2),
                         itemBuilder: (_, index) {
                           return InkWell(
+                            onTap: (){
+                              provider.setLocation(provider.searchList![index]);
+
+                            },
                             onLongPress: () {
                               provider
                                   .removeLocation(provider.searchList![index]);
                             },
                             child: LocationWeatherCard(
-                                provider.searchList![index]),
+                                provider.searchList![index], provider.isSelectedWeather(provider.searchList![index])),
                           );
                         }),
                   );
