@@ -7,6 +7,7 @@ class MainScreenProvider with ChangeNotifier {
   int selectedIndex = 0;
   int? selectedPanel = 0;
   PageController? panelController;
+  int h =0;
 
   MainScreenProvider(){
     panelController = PageController(keepPage: true, initialPage: selectedIndex);
