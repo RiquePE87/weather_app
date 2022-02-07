@@ -57,6 +57,7 @@ class WeatherProvider with ChangeNotifier {
 
   void setLocation(Weather w){
     weather = searchList!.firstWhere((element) => element == w);
+    setHourList();
     notifyListeners();
   }
 

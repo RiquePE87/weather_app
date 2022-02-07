@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/Services/navigation_service.dart';
-import 'package:weather_app/screens/forecast_report_screen.dart';
-import 'package:weather_app/screens/main_screen.dart';
 
 class MainScreenProvider with ChangeNotifier {
   int selectedIndex = 0;
   int? selectedPanel = 0;
   PageController? panelController;
-  int h =0;
 
   MainScreenProvider(){
     panelController = PageController(keepPage: true, initialPage: selectedIndex);
@@ -17,6 +13,7 @@ class MainScreenProvider with ChangeNotifier {
 
   void onItemTapped(int index) {
     selectedIndex = index;
+    selectedPanel = 0;
     notifyListeners();
     //pageController.animateToPage(page, duration: duration, curve: curve)
     pageController.jumpToPage(index);
