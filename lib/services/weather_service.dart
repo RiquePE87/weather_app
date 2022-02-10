@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:weather_app/Services/condition.dart';
+import 'package:weather_app/services/condition.dart';
 import 'package:weather_app/models/day.dart';
 import 'package:weather_app/models/hour.dart';
 import 'package:weather_app/models/weather.dart';

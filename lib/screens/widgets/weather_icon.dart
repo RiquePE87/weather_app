@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/Services/weather_service.dart';
+import 'package:weather_app/services/weather_service.dart';
 import 'package:weather_app/models/condition.dart';
 
 class WeatherIcon extends StatelessWidget {

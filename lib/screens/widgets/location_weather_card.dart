@@ -21,8 +21,8 @@ class LocationWeatherCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10)),
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      height: 60,
-      width: 60,
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

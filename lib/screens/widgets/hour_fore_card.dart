@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/Services/weather_service.dart';
+import 'package:weather_app/services/weather_service.dart';
 import 'package:weather_app/models/day.dart';
 import 'package:weather_app/models/hour.dart';
 
@@ -17,7 +17,7 @@ class HourForeCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
       padding: EdgeInsets.all(10),
-      width: 120,
+      width: MediaQuery.of(context).size.width / 3,
       decoration: BoxDecoration(
         color: hour!.isDay! ? Color.fromARGB(255, 26, 134,230) : Color.fromARGB(255, 16, 18, 48),
         borderRadius: BorderRadius.circular(10),
