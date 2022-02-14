@@ -84,7 +84,7 @@ class LocationSearchScreen extends StatelessWidget {
               Consumer<WeatherProvider>(
                 builder: (context, provider, child) {
                   return Container(
-                    height: 600,
+                    height: MediaQuery.of(context).size.height,
                     child: GridView.builder(
                         itemCount: provider.searchList!.length,
                         gridDelegate:
@@ -92,16 +92,17 @@ class LocationSearchScreen extends StatelessWidget {
                                 childAspectRatio: 1.3, crossAxisCount: 2),
                         itemBuilder: (_, index) {
                           return InkWell(
-                            onTap: (){
+                            onTap: () {
                               provider.setLocation(provider.searchList![index]);
-
                             },
                             onLongPress: () {
                               provider
                                   .removeLocation(provider.searchList![index]);
                             },
                             child: LocationWeatherCard(
-                                provider.searchList![index], provider.isSelectedWeather(provider.searchList![index])),
+                                provider.searchList![index],
+                                provider.isSelectedWeather(
+                                    provider.searchList![index])),
                           );
                         }),
                   );
