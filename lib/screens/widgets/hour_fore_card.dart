@@ -13,7 +13,7 @@ class HourForeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? icon = WeatherService().setConitionIcon(day: day, hour: hour);
+    String? icon = WeatherService().setConditionIcon(day: day, hour: hour);
     return Container(
       margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
       padding: EdgeInsets.all(10),

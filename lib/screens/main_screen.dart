@@ -13,13 +13,13 @@ import 'package:weather_app/screens/widgets/weather_panel.dart';
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final weatherProvider = Provider.of<WeatherProvider>(context);
+    //final weatherProvider = Provider.of<WeatherProvider>(context);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Consumer<WeatherProvider>(
         builder: (context, provider, child) {
-          return weatherProvider.weather != null
+          return provider.weather != null
               ? Container(
             decoration: BoxDecoration(
                 gradient: RadialGradient(colors: [
@@ -35,15 +35,19 @@ class MainScreen extends StatelessWidget {
                     builder: (context, provider, child) {
                       return Padding(
                         padding: const EdgeInsets.only(top: 50),
-                        child: Text(
-                          "${weatherProvider.weather!.location!.name
-                              .toString()}, ${weatherProvider.weather!.location!
-                              .region.toString()}",
-                          style: TextStyle(
-                              overflow: TextOverflow.fade,
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600),
+                        child: Container(
+                          width: 300,
+                          child: Text(
+                            "${provider.weather!.location!.name
+                                .toString()}, ${provider.weather!.location!
+                                .region.toString()} ${provider.weather!.location!
+                                .country.toString()}",
+                            style: TextStyle(
+                                overflow: TextOverflow.fade,
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.w600),
+                          ),
                         ),
                       );
                     },
@@ -53,7 +57,7 @@ class MainScreen extends StatelessWidget {
                   child: Consumer<WeatherProvider>(
                     builder: (context, provider, child) {
                       return Text(
-                        weatherProvider.weather!.location!.localtime
+                        provider.weather!.location!.localtime
                             .toString(),
                         style: TextStyle(
                             color: Colors.white,

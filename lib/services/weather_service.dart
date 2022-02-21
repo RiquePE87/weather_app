@@ -43,13 +43,13 @@ class WeatherService {
    return conditions;
   }
 
-  String? setConitionIcon({Day? day, Hour? hour}) {
+  String? setConditionIcon({Day? day, Hour? hour}) {
     var conditions = WeatherService().setCondition();
     String? icon;
     conditions!.forEach((element) {
-      if (element["code"] == day!.condition!.code) {
+      if (element["code"] == hour!.condition!.code) {
         icon =
-        "images/weather/64x64/${hour!.isDay! ? "day" : "night"}/${element["icon"]}.png";
+        "images/weather/64x64/${hour.isDay! ? "day" : "night"}/${element["icon"]}.png";
       }
     });
     return icon;
