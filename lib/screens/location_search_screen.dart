@@ -16,9 +16,9 @@ class LocationSearchScreen extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               gradient: RadialGradient(colors: [
-            Color.fromARGB(255, 9, 80, 135),
-            Color.fromARGB(255, 9, 11, 53),
-          ], center: Alignment(0.8, -1.0), radius: 0.9)),
+                Color.fromARGB(255, 9, 80, 135),
+                Color.fromARGB(255, 9, 11, 53),
+              ], center: Alignment(0.8, -1.0), radius: 0.9)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -37,24 +37,31 @@ class LocationSearchScreen extends StatelessWidget {
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(left: 8),
-                      child: TextField(
-                        style: TextStyle(color: Colors.white54),
-                        onChanged: (String value) {
-                          location = value;
-                        },
-                        decoration: InputDecoration(
-                            hintText: "Search",
-                            hintStyle: TextStyle(color: Colors.white54),
-                            fillColor: Color.fromARGB(255, 34, 34, 73),
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide:
+                      child: Consumer<WeatherProvider>(
+                        builder: (context, provider, child) {
+                          return TextField(
+                            style: TextStyle(color: Colors.white54),
+                            onSubmitted: (value) {
+                              provider.getLocationWeather(value);
+                            },
+                            onChanged: (String value) {
+                              location = value;
+                            },
+                            decoration: InputDecoration(
+                                hintText: "Search",
+                                hintStyle: TextStyle(color: Colors.white54),
+                                fillColor: Color.fromARGB(255, 34, 34, 73),
+                                filled: true,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide:
                                     BorderSide(color: Colors.transparent)),
-                            icon: Icon(
-                              Icons.search_rounded,
-                              color: Colors.white,
-                            )),
+                                icon: Icon(
+                                  Icons.search_rounded,
+                                  color: Colors.white,
+                                )),
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -83,28 +90,34 @@ class LocationSearchScreen extends StatelessWidget {
               ),
               Consumer<WeatherProvider>(
                 builder: (context, provider, child) {
-                  return Container(
-                    height: MediaQuery.of(context).size.height,
-                    child: GridView.builder(
-                        itemCount: provider.searchList!.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 1.3, crossAxisCount: 2),
-                        itemBuilder: (_, index) {
-                          return InkWell(
-                            onTap: () {
-                              provider.setLocation(provider.searchList![index]);
-                            },
-                            onLongPress: () {
-                              provider
-                                  .removeLocation(provider.searchList![index]);
-                            },
-                            child: LocationWeatherCard(
-                                provider.searchList![index],
-                                provider.isSelectedWeather(
-                                    provider.searchList![index])),
-                          );
-                        }),
+                  return SingleChildScrollView(
+                    child: Container(
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height,
+                      child: GridView.builder(
+
+                          itemCount: provider.searchList!.length,
+                          gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              childAspectRatio: 1.3, crossAxisCount: 2),
+                          itemBuilder: (_, index) {
+                            return InkWell(
+                              onTap: () {
+                                provider.setLocation(provider.searchList![index]);
+                              },
+                              onLongPress: () {
+                                provider
+                                    .removeLocation(provider.searchList![index]);
+                              },
+                              child: LocationWeatherCard(
+                                  provider.searchList![index],
+                                  provider.isSelectedWeather(
+                                      provider.searchList![index])),
+                            );
+                          }),
+                    ),
                   );
                 },
               )

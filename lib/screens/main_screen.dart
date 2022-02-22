@@ -30,28 +30,29 @@ class MainScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Center(
-                  child: Consumer<WeatherProvider>(
-                    builder: (context, provider, child) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 50),
-                        child: Container(
-                          width: 300,
+                Consumer<WeatherProvider>(
+                  builder: (context, provider, child) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 50, left: 8, right: 8),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(
                           child: Text(
                             "${provider.weather!.location!.name
-                                .toString()}, ${provider.weather!.location!
-                                .region.toString()} ${provider.weather!.location!
+                                .toString()}, " "${provider.weather!.location!
+                                .region.toString()}""\n ${provider.weather!.location!
                                 .country.toString()}",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 overflow: TextOverflow.fade,
                                 color: Colors.white,
-                                fontSize: 25,
+                                fontSize: 23,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
                 Center(
                   child: Consumer<WeatherProvider>(
