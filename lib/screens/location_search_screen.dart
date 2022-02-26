@@ -16,9 +16,9 @@ class LocationSearchScreen extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               gradient: RadialGradient(colors: [
-                Color.fromARGB(255, 9, 80, 135),
-                Color.fromARGB(255, 9, 11, 53),
-              ], center: Alignment(0.8, -1.0), radius: 0.9)),
+            Color.fromARGB(255, 9, 80, 135),
+            Color.fromARGB(255, 9, 11, 53),
+          ], center: Alignment(0.8, -1.0), radius: 0.9)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -42,7 +42,7 @@ class LocationSearchScreen extends StatelessWidget {
                           return TextField(
                             style: TextStyle(color: Colors.white54),
                             onSubmitted: (value) {
-                              provider.getLocationWeather(value);
+                              provider.getLocationWeather(location: value);
                             },
                             onChanged: (String value) {
                               location = value;
@@ -55,7 +55,7 @@ class LocationSearchScreen extends StatelessWidget {
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide:
-                                    BorderSide(color: Colors.transparent)),
+                                        BorderSide(color: Colors.transparent)),
                                 icon: Icon(
                                   Icons.search_rounded,
                                   color: Colors.white,
@@ -69,7 +69,7 @@ class LocationSearchScreen extends StatelessWidget {
                     builder: (context, provider, child) {
                       return GestureDetector(
                         onTap: () {
-                          provider.getLocationWeather(location);
+                          provider.getLocationWeather(location: location);
                         },
                         child: Container(
                           margin: EdgeInsets.all(8),
@@ -90,51 +90,32 @@ class LocationSearchScreen extends StatelessWidget {
               ),
               Consumer<WeatherProvider>(
                 builder: (context, provider, child) {
-                  return SingleChildScrollView(
-                    child: Container(
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height,
-                      child: GridView.builder(
-
-                          itemCount: provider.searchList!.length,
-                          gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              childAspectRatio: 1.3, crossAxisCount: 2),
-                          itemBuilder: (_, index) {
-                            return InkWell(
-                              onTap: () {
-                                provider.setLocation(provider.searchList![index]);
-                              },
-                              onLongPress: () {
-                                provider
-                                    .removeLocation(provider.searchList![index]);
-                              },
-                              child: LocationWeatherCard(
-                                  provider.searchList![index],
-                                  provider.isSelectedWeather(
-                                      provider.searchList![index])),
-                            );
-                          }),
-                    ),
+                  return Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: GridView.builder(
+                      //physics: ClampingScrollPhysics(parent: ),
+                        itemCount: provider.searchList!.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                childAspectRatio: 1.3, crossAxisCount: 2),
+                        itemBuilder: (_, index) {
+                          return InkWell(
+                            onTap: () {
+                              provider.setLocation(provider.searchList![index]);
+                            },
+                            onLongPress: () {
+                              provider
+                                  .removeLocation(provider.searchList![index]);
+                            },
+                            child: LocationWeatherCard(
+                                provider.searchList![index],
+                                provider.isSelectedWeather(
+                                    provider.searchList![index])),
+                          );
+                        }),
                   );
                 },
               )
-              // Container(
-              //   height: 600,
-              //   child: Consumer<WeatherProvider>(
-              //     builder: (context, provider, child) {
-              //       return ListView.builder(
-              //           scrollDirection: Axis.vertical,
-              //           itemCount: provider.searchList!.length,
-              //           itemBuilder: (_, index) {
-              //             return LocationWeatherCard(
-              //                 provider.searchList![index]);
-              //           });
-              //     },
-              //   ),
-              // )
             ],
           ),
         ),

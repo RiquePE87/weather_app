@@ -15,7 +15,6 @@ class MainScreenProvider with ChangeNotifier {
     selectedIndex = index;
     selectedPanel = 0;
     notifyListeners();
-    //pageController.animateToPage(page, duration: duration, curve: curve)
     pageController.jumpToPage(index);
   }
 

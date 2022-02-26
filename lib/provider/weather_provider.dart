@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/services/location_service.dart';
 import 'package:weather_app/services/weather_service.dart';
 import 'package:weather_app/models/forecast_day.dart';
 import 'package:weather_app/models/hour.dart';
@@ -10,24 +11,32 @@ class WeatherProvider with ChangeNotifier {
   ForecastDay? forecastDay;
   List<Map>? conditions;
   bool? hasError;
+  bool hasLocation = false;
   List<Weather>? searchList = [];
+  LocationService? locationService;
 
   WeatherProvider() {
-    getLocationWeather("Recife");
+    locationService = LocationService();
+    getLocationWeather();
   }
 
-  void getLocationWeather(String location) {
-    if (location.isNotEmpty) {
+  void getLocationWeather({String? location}) async {
+    if (location==null) {
+      await locationService!.getCoordinates().then((value){
+        location = value;
+      });
+    }
+
       WeatherService()
-          .fetchWeather(location, 7)
+          .fetchWeather(location!, 7)
           .then((value) => weather = value)
           .whenComplete(() {
         setHourList();
         addLocation();
-        SnackBar(content: Text("Location changed to ${weather!.location!.name}"));
+        SnackBar(
+            content: Text("Location changed to ${weather!.location!.name}"));
         notifyListeners();
       });
-    }
   }
 
   void setHourList() {
@@ -55,16 +64,16 @@ class WeatherProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setLocation(Weather w){
+  void setLocation(Weather w) {
     weather = searchList!.firstWhere((element) => element == w);
     setHourList();
     notifyListeners();
   }
 
-  bool isSelectedWeather(Weather w){
-    if (w == weather){
+  bool isSelectedWeather(Weather w) {
+    if (w == weather) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
