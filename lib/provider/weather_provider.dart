@@ -26,7 +26,6 @@ class WeatherProvider with ChangeNotifier {
         location = value;
       });
     }
-
       WeatherService()
           .fetchWeather(location!, 7)
           .then((value) => weather = value)

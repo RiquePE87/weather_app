@@ -81,7 +81,7 @@ class ForecastRepostScreen extends StatelessWidget {
             ),
             Consumer<WeatherProvider>(
               builder: (context, provider, child) {
-                return ForecastDayList(provider.weather!.forecast!.forecasts);
+                return Expanded(child: ForecastDayList(provider.weather!.forecast!.forecasts));
               },
             )
           ],

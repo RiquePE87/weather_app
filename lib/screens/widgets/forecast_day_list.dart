@@ -11,7 +11,7 @@ class ForecastDayList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 500,
+      height: MediaQuery.of(context).size.height,
       child: ListView.builder(
           itemCount: forecasts!.length,
           itemBuilder: (_, index) {
