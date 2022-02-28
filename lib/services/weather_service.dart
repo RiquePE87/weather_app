@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/services/condition.dart';
 import 'package:weather_app/models/day.dart';
 import 'package:weather_app/models/hour.dart';
@@ -21,6 +22,8 @@ class WeatherService {
 
     return response;
   }
+
+
 
   Future<Weather?> fetchWeather(String city, int days) async {
     Weather? weather;
@@ -54,4 +57,5 @@ class WeatherService {
     });
     return icon;
   }
+
 }

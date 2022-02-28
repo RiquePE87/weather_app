@@ -3,8 +3,8 @@ import 'package:weather_app/models/weather.dart';
 
 class FullForecastScreen extends StatelessWidget {
 
-  Weather _weather;
-  TextStyle _title = TextStyle(
+  final Weather _weather;
+  final TextStyle _title = TextStyle(
       color: Colors.white,
       fontSize: 20,
       fontWeight: FontWeight.w400);

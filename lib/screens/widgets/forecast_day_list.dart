@@ -6,7 +6,7 @@ import 'forecast_day_card.dart';
 class ForecastDayList extends StatelessWidget {
   ForecastDayList(this.forecasts);
 
-  List<ForecastDay>? forecasts;
+  final List<ForecastDay>? forecasts;
 
   @override
   Widget build(BuildContext context) {

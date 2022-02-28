@@ -5,9 +5,9 @@ import 'package:weather_app/models/condition.dart';
 class WeatherIcon extends StatelessWidget {
   WeatherIcon(this.condition, this.isDay, this.scale);
 
-  Condition? condition;
-  bool isDay;
-  double scale;
+  final Condition? condition;
+  final bool isDay;
+  final double scale;
 
   @override
   Widget build(BuildContext context) {

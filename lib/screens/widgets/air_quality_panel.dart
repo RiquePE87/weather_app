@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/models/weather.dart';
+import 'package:weather_app/provider/weather_provider.dart';
+import 'package:weather_app/screens/widgets/air_quality_meter.dart';
 import 'package:weather_app/screens/widgets/epa_meter.dart';
 
 class AirQualityPanel extends StatelessWidget {
-  Weather weather;
+  final Weather weather;
 
   AirQualityPanel(this.weather);
 
@@ -49,7 +52,47 @@ class AirQualityPanel extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w400)),
-          EPAMeter(weather.current!.airQuality!.usEpaIndex!)
+          Consumer<WeatherProvider>(
+            builder: (context, provider, child) {
+              return provider.isUKDefra! ? AirQualityMeter(
+                level: weather.current!.airQuality!.gbDefraIndex,
+                levelColor: [
+                  Colors.green,
+                  Colors.lightGreen,
+                  Colors.lightGreen,
+                  Colors.yellow,
+                  Colors.yellow,
+                  Colors.yellow.shade600,
+                  Colors.orange.shade700,
+                  Colors.orange.shade700,
+                  Colors.red,
+                  Colors.red
+                ],
+              ) : AirQualityMeter(
+                level: weather.current!.airQuality!.usEpaIndex!,
+                levelString: [
+                 "Low",
+                  "Low",
+                  "Low",
+                  "Moderate",
+                  "Moderate",
+                  "Moderate",
+                  "High",
+                  "High",
+                  "High",
+                  "Very High"
+                ],
+                levelColor: [
+                  Colors.green,
+                  Colors.lightGreen,
+                  Colors.yellow,
+                  Colors.yellow.shade600,
+                  Colors.orange.shade700,
+                  Colors.red
+                ],
+              );
+            },
+          )
         ],
       ),
     );

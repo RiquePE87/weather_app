@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/provider/main_screen_provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
-import 'package:weather_app/screens/widgets/bottom_navigation.dart';
 import 'package:weather_app/screens/widgets/forecast_day_list.dart';
 import 'package:weather_app/screens/widgets/hour_by_hour_forecast_list.dart';
 
@@ -37,7 +35,7 @@ class ForecastRepostScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              padding:const EdgeInsets.fromLTRB(8, 8, 8, 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -63,7 +61,7 @@ class ForecastRepostScreen extends StatelessWidget {
             ),
             HourByHourForecastList(),
             Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

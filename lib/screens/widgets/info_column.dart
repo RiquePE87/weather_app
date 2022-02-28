@@ -4,8 +4,8 @@ class InfoColumn extends StatelessWidget {
 
   InfoColumn({this.title, this.data});
 
-  String? title;
-  String? data;
+  final String? title;
+  final String? data;
   @override
   Widget build(BuildContext context) {
     return Column(

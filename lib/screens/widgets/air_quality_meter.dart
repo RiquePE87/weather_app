@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
 
-class EPAMeter extends StatelessWidget {
-  final int _level;
-  final List<Color> levelColor = [
-    Colors.green,
-    Colors.lightGreen,
-    Colors.yellow,
-    Colors.yellow.shade600,
-    Colors.orange.shade700,
-    Colors.red
-  ];
-  final List<String> _levelString = [
-    "Good",
-    "Moderate",
-    "Unhealthy for sensitive group",
-    "Unhealthy",
-    "Very Unhealthy",
-    "Hazardous"
-  ];
+class AirQualityMeter extends StatelessWidget {
 
-  EPAMeter(this._level);
+  final int? level;
+  final List<Color>? levelColor;
+  final List<String>? levelString;
+
+  AirQualityMeter({this.level, this.levelString, this.levelColor});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +22,7 @@ class EPAMeter extends StatelessWidget {
                 _createEPAMeter(),
               ],
             ),
-            Text(" ${_levelString[_level - 1]}",
+            Text(" ${levelString![level! - 1]}",
                 style: TextStyle(color: Colors.white)),
           ],
         ));
@@ -48,22 +35,19 @@ class EPAMeter extends StatelessWidget {
       decoration: BoxDecoration(
           color: color,
           border:
-              Border.fromBorderSide(BorderSide(color: Colors.grey, width: 1))),
+          Border.fromBorderSide(BorderSide(color: Colors.grey, width: 1))),
     );
   }
 
   Widget _createEPAMeter() {
-    List<Widget> containerList = [
-      _createContainer(Colors.white),
-      _createContainer(Colors.white),
-      _createContainer(Colors.white),
-      _createContainer(Colors.white),
-      _createContainer(Colors.white),
-      _createContainer(Colors.white),
-    ];
+    List<Widget> containerList = [];
 
-    for (int i = 0; i < _level; i++) {
-      containerList[i] = _createContainer(levelColor[i]);
+    for (int i =0; i < levelColor!.length; i++){
+      containerList.add(_createContainer(Colors.white));
+    }
+
+    for (int i = 0; i < level!; i++) {
+      containerList[i] = _createContainer(levelColor![i]);
     }
 
     return Row(

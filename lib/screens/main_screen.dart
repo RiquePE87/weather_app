@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/provider/main_screen_provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
 import 'package:weather_app/screens/full_forecast_screen.dart';
 import 'package:weather_app/screens/widgets/air_quality_panel.dart';
 import 'package:weather_app/screens/widgets/hour_by_hour_forecast_list.dart';
-import 'package:weather_app/screens/widgets/info_column.dart';
-import 'package:weather_app/screens/widgets/weather_icon.dart';
 import 'package:weather_app/screens/widgets/weather_panel.dart';
 
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //final weatherProvider = Provider.of<WeatherProvider>(context);
 
     return Scaffold(
       backgroundColor: Colors.transparent,

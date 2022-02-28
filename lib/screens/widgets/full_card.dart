@@ -3,8 +3,8 @@ import 'package:weather_app/models/weather.dart';
 
 class FullCard extends StatelessWidget {
 
-  Icon icon;
-  List<dynamic> list;
+  final Icon icon;
+  final List<dynamic> list;
 
   FullCard(this.icon, this.list);
 

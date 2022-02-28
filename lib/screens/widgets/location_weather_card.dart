@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/models/weather.dart';
+import 'package:weather_app/provider/weather_provider.dart';
 import 'package:weather_app/screens/widgets/weather_icon.dart';
 
 class LocationWeatherCard extends StatelessWidget {
-  Weather weather;
-  bool isSelected;
+  final Weather weather;
+  final bool isSelected;
 
   LocationWeatherCard(this.weather, this.isSelected);
 
@@ -12,9 +14,11 @@ class LocationWeatherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: [
-          isSelected ? BoxShadow(color: Colors.white, blurRadius: 3, spreadRadius: 3) : BoxShadow()
-        ],
+          boxShadow: [
+            isSelected
+                ? BoxShadow(color: Colors.white, blurRadius: 3, spreadRadius: 3)
+                : BoxShadow()
+          ],
           color: weather.current!.isDay!
               ? Color.fromARGB(255, 26, 134, 230)
               : Color.fromARGB(255, 16, 18, 48),
@@ -32,12 +36,17 @@ class LocationWeatherCard extends StatelessWidget {
                 children: [
                   Container(
                     width: 70,
-                    child: Text(
-                        "${weather.current!.temperatureC!.round().toString()}ºC",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w400)),
+                    child: Consumer<WeatherProvider>(
+                      builder: (context, provider, child) {
+                        return Text(provider.isFarenheit! ?
+                        "${weather.current!.temperatureF!.round().toString()}ºF" :
+                            "${weather.current!.temperatureC!.round().toString()}ºC",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w400));
+                      },
+                    ),
                   ),
                   Container(
                     width: 70,
