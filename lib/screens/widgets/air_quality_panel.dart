@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:weather_app/models/weather.dart';
 import 'package:weather_app/provider/weather_provider.dart';
 import 'package:weather_app/screens/widgets/air_quality_meter.dart';
-import 'package:weather_app/screens/widgets/epa_meter.dart';
 
 class AirQualityPanel extends StatelessWidget {
   final Weather weather;
@@ -68,20 +67,29 @@ class AirQualityPanel extends StatelessWidget {
                   Colors.red,
                   Colors.red
                 ],
+                  levelString: [
+                    "Low",
+                    "Low",
+                    "Low",
+                    "Moderate",
+                    "Moderate",
+                    "Moderate",
+                    "High",
+                    "High",
+                    "High",
+                    "Very High"
+                  ],
               ) : AirQualityMeter(
                 level: weather.current!.airQuality!.usEpaIndex!,
                 levelString: [
-                 "Low",
-                  "Low",
-                  "Low",
+                  "Good",
                   "Moderate",
-                  "Moderate",
-                  "Moderate",
-                  "High",
-                  "High",
-                  "High",
-                  "Very High"
+                  "Unhealthy for sensitive group",
+                  "Unhealthy",
+                  "Very Unhealthy",
+                  "Hazardous"
                 ],
+
                 levelColor: [
                   Colors.green,
                   Colors.lightGreen,

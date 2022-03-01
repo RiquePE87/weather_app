@@ -15,13 +15,8 @@ class AirQualityMeter extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("US EPA ", style: TextStyle(color: Colors.white)),
-                _createEPAMeter(),
-              ],
-            ),
+            Text(levelColor!.length > 6 ? "GbDefra":"US EPA ", style: TextStyle(color: Colors.white)),
+        _createEPAMeter(),
             Text(" ${levelString![level! - 1]}",
                 style: TextStyle(color: Colors.white)),
           ],

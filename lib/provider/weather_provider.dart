@@ -24,6 +24,7 @@ class WeatherProvider with ChangeNotifier {
     locationService = LocationService();
     getLocationWeather();
     getDegreePref();
+    getAirQualityPref();
   }
 
   void setDegreePref(bool choice)async{
@@ -43,7 +44,7 @@ class WeatherProvider with ChangeNotifier {
   void setAirQualityPref(bool choice)async{
     final prefs = await SharedPreferences.getInstance();
     isUKDefra = choice;
-    await prefs.setBool("isUKDefra", isFarenheit!);
+    await prefs.setBool("isUKDefra", isUKDefra!);
     notifyListeners();
   }
 
@@ -66,7 +67,9 @@ class WeatherProvider with ChangeNotifier {
         .whenComplete(() {
       setHourList();
       addLocation();
-   showSnack(weather!);
+      if (searchList!.length > 1){
+        showSnack(weather!);
+      }
       notifyListeners();
     });
   }
@@ -99,7 +102,9 @@ class WeatherProvider with ChangeNotifier {
   void setLocation(Weather w) {
     weather = searchList!.firstWhere((element) => element == w);
     setHourList();
-    showSnack(weather!);
+    if (searchList!.length > 1){
+      showSnack(weather!);
+    }
     notifyListeners();
   }
 
