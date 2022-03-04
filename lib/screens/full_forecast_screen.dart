@@ -40,26 +40,124 @@ class FullForecastScreen extends StatelessWidget {
             Consumer<WeatherProvider>(builder: ((context, provider, child) {
               return Text(
                 provider.isFarenheit!
-                    ? "${_weather.current!.temperatureF!.round()}ºF"
-                    : "${_weather.current!.temperatureC!.round()}ºC",
+                    ? "${_weather.current!.temperatureF!.round()}ºF \n FellsLike ${_weather.current!.feelsLikeF!.round()}ºF"
+                    : "${_weather.current!.temperatureC!.round()}ºC \n FeelsLike ${_weather.current!.feelsLikeC!.round()}ºC",
                 style: _title,
+                textAlign: TextAlign.center,
               );
             })),
             Expanded(
               child: GridView(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
+                    crossAxisCount: 2, childAspectRatio: 3),
                 children: [
                   Container(
-                    child: Column(
+                    margin: EdgeInsets.only(right: 8, bottom: 8),
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 16, 18, 48),
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.only(top: 8),
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 30,
+                    child: Row(
                       children: [
                         Image.asset(
-                          "images/celsius.png",
-                          scale: 0.1,
+                          "images/cloud1.png",
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Humidity ${_weather.current!.humidity}%",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                              Text(
+                                "Clouds ${_weather.current!.cloud}%",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),
-                  )
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 8),
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 16, 18, 48),
+                        borderRadius: BorderRadius.circular(10)),
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "images/wind.png",
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Wind ${_weather.current!.windKph!.round()}Kph",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                              Text(
+                                "Wind Dir. ${_weather.current!.windDegree}, ${_weather.current!.windDirection}",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                              Text(
+                                "Pressure ${_weather.current!.pressureIn}",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                              Text(
+                                "Gust ${_weather.current!.gustKph!.round()} kph",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 16, 18, 48),
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.only(top: 8),
+                    margin: EdgeInsets.only(right: 8),
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 30,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "images/rain3.png",
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Precipitation ${_weather.current!.humidity} ml",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                              Text(
+                                "Clouds ${_weather.current!.cloud}%",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             )
