@@ -19,7 +19,6 @@ class WeatherProvider with ChangeNotifier {
   bool? isFarenheit = false;
   bool? isUKDefra = false;
 
-
   WeatherProvider() {
     locationService = LocationService();
     getLocationWeather();
@@ -27,32 +26,30 @@ class WeatherProvider with ChangeNotifier {
     getAirQualityPref();
   }
 
-  void setDegreePref(bool choice)async{
+  void setDegreePref(bool choice) async {
     final prefs = await SharedPreferences.getInstance();
     isFarenheit = choice;
     await prefs.setBool("isFarenheit", isFarenheit!);
     notifyListeners();
   }
 
-  void getDegreePref()async{
-
+  void getDegreePref() async {
     final prefs = await SharedPreferences.getInstance();
-
-    isFarenheit = prefs.getBool("isFarenheit");
+    if (prefs.getBool("isFarenheit") != null)
+      isFarenheit = prefs.getBool("isFarenheit");
   }
 
-  void setAirQualityPref(bool choice)async{
+  void setAirQualityPref(bool choice) async {
     final prefs = await SharedPreferences.getInstance();
     isUKDefra = choice;
     await prefs.setBool("isUKDefra", isUKDefra!);
     notifyListeners();
   }
 
-  void getAirQualityPref()async{
-
+  void getAirQualityPref() async {
     final prefs = await SharedPreferences.getInstance();
-
-    isUKDefra = prefs.getBool("isUKDefra");
+    if (prefs.getBool("isUKDefra") != null)
+      isUKDefra = prefs.getBool("isUKDefra");
   }
 
   void getLocationWeather({String? location}) async {
@@ -67,7 +64,7 @@ class WeatherProvider with ChangeNotifier {
         .whenComplete(() {
       setHourList();
       addLocation();
-      if (searchList!.length > 1){
+      if (searchList!.length > 1) {
         showSnack(weather!);
       }
       notifyListeners();
@@ -102,7 +99,7 @@ class WeatherProvider with ChangeNotifier {
   void setLocation(Weather w) {
     weather = searchList!.firstWhere((element) => element == w);
     setHourList();
-    if (searchList!.length > 1){
+    if (searchList!.length > 1) {
       showSnack(weather!);
     }
     notifyListeners();
@@ -115,12 +112,13 @@ class WeatherProvider with ChangeNotifier {
       return false;
     }
   }
-   void showSnack(Weather weather){
-     final snackBar = SnackBar(
-       backgroundColor: Color.fromARGB(255, 9, 11, 120),
-         duration: Duration(milliseconds: 2000),
-         content: Text("Location changed to ${weather.location!.name}"));
-     ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
-         .showSnackBar(snackBar);
-   }
+
+  void showSnack(Weather weather) {
+    final snackBar = SnackBar(
+        backgroundColor: Color.fromARGB(255, 9, 11, 120),
+        duration: Duration(milliseconds: 2000),
+        content: Text("Location changed to ${weather.location!.name}"));
+    ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
+        .showSnackBar(snackBar);
+  }
 }

@@ -47,118 +47,127 @@ class FullForecastScreen extends StatelessWidget {
               );
             })),
             Expanded(
-              child: GridView(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 3),
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 8, bottom: 8),
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 16, 18, 48),
-                        borderRadius: BorderRadius.circular(10)),
-                    padding: EdgeInsets.only(top: 8),
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: 30,
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          "images/cloud1.png",
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Humidity ${_weather.current!.humidity}%",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
-                              ),
-                              Text(
-                                "Clouds ${_weather.current!.cloud}%",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
-                              ),
-                            ],
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Wrap(
+                  verticalDirection: VerticalDirection.down,
+                  direction: Axis.horizontal,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  spacing: 8,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 16, 18, 48),
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: EdgeInsets.only(top: 8),
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      height: 60,
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "images/cloud1.png",
                           ),
-                        )
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Humidity ${_weather.current!.humidity}%",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 14),
+                                ),
+                                Text(
+                                  "Clouds ${_weather.current!.cloud}%",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 14),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 8),
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 16, 18, 48),
-                        borderRadius: BorderRadius.circular(10)),
-                    width: MediaQuery.of(context).size.width / 2,
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          "images/wind.png",
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Wind ${_weather.current!.windKph!.round()}Kph",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
-                              ),
-                              Text(
-                                "Wind Dir. ${_weather.current!.windDegree}, ${_weather.current!.windDirection}",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
-                              ),
-                              Text(
-                                "Pressure ${_weather.current!.pressureIn}",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
-                              ),
-                              Text(
-                                "Gust ${_weather.current!.gustKph!.round()} kph",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
-                              ),
-                            ],
+                    Container(
+                      margin: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 16, 18, 48),
+                          borderRadius: BorderRadius.circular(10)),
+                      width: MediaQuery.of(context).size.width / 1.8,
+                      height: 80,
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "images/wind.png",
                           ),
-                        )
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Wind ${_weather.current!.windKph!.round()}Kph",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 14),
+                                ),
+                                Text(
+                                  "Wind Dir. ${_weather.current!.windDegree}, ${_weather.current!.windDirection}",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 14),
+                                ),
+                                Text(
+                                  "Pressure ${_weather.current!.pressureIn}",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 14),
+                                ),
+                                Text(
+                                  "Gust ${_weather.current!.gustKph!.round()} kph",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 14),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 16, 18, 48),
-                        borderRadius: BorderRadius.circular(10)),
-                    padding: EdgeInsets.only(top: 8),
-                    margin: EdgeInsets.only(right: 8),
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: 30,
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          "images/rain3.png",
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Precipitation ${_weather.current!.humidity} ml",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
-                              ),
-                              Text(
-                                "Clouds ${_weather.current!.cloud}%",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
-                              ),
-                            ],
+                    Container(
+                      margin: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 16, 18, 48),
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: EdgeInsets.only(top: 8),
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: 60,
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "images/rain3.png",
                           ),
-                        )
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Precipitation ${_weather.current!.humidity} ml",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 14),
+                                ),
+                                Text(
+                                  "Clouds ${_weather.current!.cloud}%",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 14),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             )
           ],
