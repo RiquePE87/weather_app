@@ -7,7 +7,7 @@ main() {
     final WeatherService repository = WeatherService();
     var result;
 
-    await repository.fetchWeather("Recife", 3).then((value) => result = value);
+    await repository.fetchWeather("Moscow", 3).then((value) => result = value);
     print(result);
 
     expect(result.runtimeType == Weather, true);

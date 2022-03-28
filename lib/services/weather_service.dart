@@ -10,7 +10,7 @@ class WeatherService {
   final String key = "4611193cd03d47fb977132900222201";
 
   Future<dynamic> _getHttp(String city, int days) async {
-    String request = "$urlBase$key&q=$city&days=$days&aqi=yes&alerts=no";
+    String request = "$urlBase$key&q=$city&days=$days&aqi=yes&alerts=yes";
 
     var response;
     try {
