@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/services/condition.dart';
 import 'package:weather_app/models/day.dart';
 import 'package:weather_app/models/hour.dart';
@@ -23,27 +22,27 @@ class WeatherService {
     return response;
   }
 
-
-
   Future<Weather?> fetchWeather(String city, int days) async {
     Weather? weather;
     var response;
     try {
-      await _getHttp(city, days).then((value) => response = value).onError((error, stackTrace) => true);
+      await _getHttp(city, days)
+          .then((value) => response = value)
+          .onError((error, stackTrace) => true);
       weather = Weather.fromJson(jsonDecode(response.toString()));
-      if (response != null){
+      if (response != null) {
         return weather;
-      }
-      else{
+      } else {
         throw Exception("Cannot fetch weather data");
       }
     } catch (ex) {
       return null;
     }
   }
-  setCondition(){
+
+  setCondition() {
     var conditions = json.decode(CONDITIONS);
-   return conditions;
+    return conditions;
   }
 
   String? setConditionIcon({Day? day, Hour? hour}) {
@@ -52,10 +51,9 @@ class WeatherService {
     conditions!.forEach((element) {
       if (element["code"] == hour!.condition!.code) {
         icon =
-        "images/weather/64x64/${hour.isDay! ? "day" : "night"}/${element["icon"]}.png";
+            "images/weather/64x64/${hour.isDay! ? "day" : "night"}/${element["icon"]}.png";
       }
     });
     return icon;
   }
-
 }

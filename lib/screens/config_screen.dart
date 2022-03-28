@@ -27,7 +27,7 @@ class ConfigScreen extends StatelessWidget {
                     Text("Farenheit",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 20,
                             fontWeight: FontWeight.w400)),
                     Consumer<WeatherProvider>(
                       builder: (context, provider, child) {
@@ -49,7 +49,7 @@ class ConfigScreen extends StatelessWidget {
                     Text("Use UK Defra",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 20,
                             fontWeight: FontWeight.w400)),
                     Consumer<WeatherProvider>(
                       builder: (context, provider, child) {

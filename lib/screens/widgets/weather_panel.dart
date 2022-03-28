@@ -7,7 +7,6 @@ import 'package:weather_app/screens/widgets/weather_icon.dart';
 import 'info_column.dart';
 
 class WeatherPanel extends StatelessWidget {
-
   final Weather weather;
 
   WeatherPanel(this.weather);
@@ -17,8 +16,7 @@ class WeatherPanel extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        WeatherIcon(weather.current!.condition,
-            weather.current!.isDay!, 0.4),
+        WeatherIcon(weather.current!.condition, weather.current!.isDay!, 0.5),
         Consumer<WeatherProvider>(
           builder: (context, provider, child) {
             return Row(
@@ -26,18 +24,15 @@ class WeatherPanel extends StatelessWidget {
               children: [
                 InfoColumn(
                     title: "Temp",
-                    data:
-                        provider.isFarenheit! ?
-                        "${weather.current!.temperatureF!.round().toString()}ºF":
-                    "${weather.current!.temperatureC!.round().toString()}ºC"),
+                    data: provider.isFarenheit!
+                        ? "${weather.current!.temperatureF!.round().toString()}ºF"
+                        : "${weather.current!.temperatureC!.round().toString()}ºC"),
                 InfoColumn(
                     title: "Wind",
-                    data:
-                    "${weather.current!.windKph.toString()} km/h"),
+                    data: "${weather.current!.windKph.toString()} km/h"),
                 InfoColumn(
                     title: "Humidity",
-                    data:
-                    "${weather.current!.humidity.toString()}%"),
+                    data: "${weather.current!.humidity.toString()}%"),
               ],
             );
           },
