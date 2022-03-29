@@ -17,6 +17,10 @@ class WeatherPanel extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         WeatherIcon(weather.current!.condition, weather.current!.isDay!, 0.5),
+        Text(
+          weather.current!.condition!.text!,
+          style: TextStyle(color: Colors.white, fontSize: 16),
+        ),
         Consumer<WeatherProvider>(
           builder: (context, provider, child) {
             return Row(

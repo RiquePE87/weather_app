@@ -23,5 +23,6 @@ class Weather {
         alerts!.add(new Alert.fromJson(f));
       });
     }
+    print(alerts);
   }
 }
