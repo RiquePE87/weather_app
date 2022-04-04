@@ -56,14 +56,16 @@ class FullForecastScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 );
               })),
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Wrap(
-                  //verticalDirection: VerticalDirection.down,
-                  direction: Axis.horizontal,
-                  alignment: WrapAlignment.center,
-                  //crossAxisAlignment: WrapCrossAlignment.start,
-                  spacing: 8,
+              SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                flex: 2,
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: 3,
+                  //mainAxisSpacing: 2,
+                  //crossAxisSpacing: 2,
                   children: [
                     InfoCard([
                       "Wind ${_weather.current!.windKph!.round()}Kph",

@@ -4,6 +4,7 @@ import 'package:weather_app/provider/main_screen_provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
 import 'package:weather_app/screens/full_forecast_screen.dart';
 import 'package:weather_app/screens/widgets/air_quality_panel.dart';
+import 'package:weather_app/screens/widgets/alert_notification.dart';
 import 'package:weather_app/screens/widgets/hour_by_hour_forecast_list.dart';
 import 'package:weather_app/screens/widgets/weather_panel.dart';
 import '../models/alert.dart';
@@ -198,46 +199,12 @@ class MainScreen extends StatelessWidget {
             provider.weather != null && provider.weather!.alerts!.length != 0
                 ? Positioned(
                     top: 20,
-                    child: Wrap(children: [
-                      Container(
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.black54,
-                          child: Column(
-                            children: createAlert(provider.weather!.alerts!),
-                          )),
-                    ]),
-                  )
+                    left: 10,
+                    child: AlertNotification(provider.weather!.alerts!))
                 : Container()
           ],
         );
       },
     );
-  }
-
-  List<Widget> createAlert(List<Alert?> alerts) {
-    List<Widget> alertTextList = [];
-    alerts.forEach((element) {
-      alertTextList.add(
-        Row(
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
-              child: Icon(
-                Icons.warning,
-                color: Colors.redAccent,
-              ),
-            ),
-            Text(
-              element!.event!,
-              style: TextStyle(color: Colors.white),
-            ),
-          ],
-        ),
-      );
-    });
-
-    return alertTextList;
   }
 }
