@@ -18,12 +18,21 @@ class WeatherProvider with ChangeNotifier {
   LocationService? locationService;
   bool? isFarenheit = false;
   bool? isUKDefra = false;
+  bool? isLoading = false;
 
   WeatherProvider() {
+    startService();
+  }
+
+  void startService() {
     locationService = LocationService();
     getLocationWeather();
     getDegreePref();
     getAirQualityPref();
+  }
+
+  Future<void> reloadLocation() async {
+    getLocationWeather();
   }
 
   void setDegreePref(bool choice) async {
@@ -53,15 +62,18 @@ class WeatherProvider with ChangeNotifier {
   }
 
   void getLocationWeather({String? location}) async {
+    isLoading = true;
     if (location == null) {
       await locationService!.getCoordinates().then((value) {
         location = value;
       });
     }
+
     WeatherService()
         .fetchWeather(location!, 7)
         .then((value) => weather = value)
         .whenComplete(() {
+      isLoading = false;
       setHourList();
       addLocation();
       if (searchList!.length > 1) {
