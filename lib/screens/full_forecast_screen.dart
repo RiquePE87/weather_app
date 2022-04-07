@@ -70,12 +70,12 @@ class FullForecastScreen extends StatelessWidget {
                     InfoCard([
                       "Wind ${_weather.current!.windKph!.round()}Kph",
                       "Wind Dir. ${_weather.current!.windDegree}, ${_weather.current!.windDirection}",
-                      "Pressure ${_weather.current!.pressureIn!.round()}",
+                      "Pressure ${_weather.current!.pressureIn!.round()} mb",
                       "Gust ${_weather.current!.gustKph!.round()} kph",
                     ], "images/wind.png"),
                     InfoCard([
                       "Precipitation ${_weather.current!.humidity} ml",
-                      "Chance to Rain ${_weather.forecast!.forecasts![0].day!.dailyChanceOfRain}",
+                      "Chance to Rain ${_weather.forecast!.forecasts![0].day!.dailyChanceOfRain}%",
                       "Clouds ${_weather.current!.cloud}%",
                     ], "images/rain3.png"),
                     InfoCard([

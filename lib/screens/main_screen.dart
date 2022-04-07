@@ -27,7 +27,7 @@ class MainScreen extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 body: Consumer<WeatherProvider>(
                   builder: (context, provider, child) {
-                    return provider.weather != null
+                    return provider.weather != null && !provider.isLoading!
                         ? Container(
                             decoration: BoxDecoration(
                                 gradient: RadialGradient(colors: [
@@ -205,7 +205,31 @@ class MainScreen extends StatelessWidget {
                             ], center: Alignment(0.8, -1.0), radius: 0.9)),
                             height: MediaQuery.of(context).size.height,
                             child: Center(
-                              child: CircularProgressIndicator(),
+                              child: provider.hasConnection! ||
+                                      provider.isLoading!
+                                  ? CircleAvatar(
+                                      radius: 25,
+                                      backgroundColor: Colors.white,
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: Colors.white24,
+                                      ),
+                                    )
+                                  : Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Check your internet connection!",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        TextButton(
+                                            onPressed: () =>
+                                                provider.reloadLocation(),
+                                            child: Text("Try Again"))
+                                      ],
+                                    ),
                             ),
                           );
                   },

@@ -7,9 +7,18 @@ main() {
     final WeatherService repository = WeatherService();
     var result;
 
-    await repository.fetchWeather("Moscow", 3).then((value) => result = value);
+    await repository.fetchWeather("kkkkkk", 3).then((value) => result = value);
     print(result);
 
     expect(result.runtimeType == Weather, true);
+  });
+
+  test('test checks method returned', () async {
+    final WeatherService repository = WeatherService();
+    var result;
+
+    await repository.getHttp("kkkkk", 3).then((value) => result = value);
+
+    expect(result != null, true);
   });
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:weather_app/services/condition.dart';
 import 'package:weather_app/models/day.dart';
 import 'package:weather_app/models/hour.dart';
@@ -9,35 +10,42 @@ class WeatherService {
   final String urlBase = "http://api.weatherapi.com/v1/forecast.json?key=";
   final String key = "4611193cd03d47fb977132900222201";
 
-  Future<dynamic> _getHttp(String city, int days) async {
+  Future<dynamic> getHttp(String city, int days) async {
     String request = "$urlBase$key&q=$city&days=$days&aqi=yes&alerts=yes";
 
     var response;
     try {
-      response = await Dio().get(request);
-    } catch (ex) {
-      print(ex);
+      await Dio().get(request).then((value) {
+        if (value.statusCode == 200) {
+          response = value;
+        }
+      });
+    } on DioError catch (e) {
+      print(e.message);
+      return null;
     }
-
     return response;
+  }
+
+  Future<bool> checkInternetConnection() async {
+    return await InternetConnectionChecker().hasConnection;
   }
 
   Future<Weather?> fetchWeather(String city, int days) async {
     Weather? weather;
     var response;
     try {
-      await _getHttp(city, days)
+      await getHttp(city, days)
           .then((value) => response = value)
           .onError((error, stackTrace) => true);
-      weather = Weather.fromJson(jsonDecode(response.toString()));
-      if (response != null) {
-        return weather;
+      if (response != null && response.statusCode == 200) {
+        weather = Weather.fromJson(jsonDecode(response.toString()));
+        //return weather;
       } else {
         throw Exception("Cannot fetch weather data");
       }
-    } catch (ex) {
-      return null;
-    }
+    } catch (ex) {}
+    return weather;
   }
 
   setCondition() {

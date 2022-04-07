@@ -24,10 +24,10 @@ class ConfigScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Farenheit",
+                    Text("Use Farenheit degree",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.w400)),
                     Consumer<WeatherProvider>(
                       builder: (context, provider, child) {
@@ -46,10 +46,10 @@ class ConfigScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Use UK Defra",
+                    Text("Use UK Defra degree",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.w400)),
                     Consumer<WeatherProvider>(
                       builder: (context, provider, child) {

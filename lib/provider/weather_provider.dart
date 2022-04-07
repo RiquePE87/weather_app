@@ -12,20 +12,27 @@ class WeatherProvider with ChangeNotifier {
   List<Hour>? hourList;
   ForecastDay? forecastDay;
   List<Map>? conditions;
-  bool? hasError;
+  bool? hasError = false;
   bool hasLocation = false;
   List<Weather>? searchList = [];
   LocationService? locationService;
   bool? isFarenheit = false;
   bool? isUKDefra = false;
   bool? isLoading = false;
+  bool? hasConnection = true;
 
   WeatherProvider() {
-    startService();
+    WeatherService().checkInternetConnection().then((value) {
+      locationService = LocationService();
+      hasConnection = value;
+      notifyListeners();
+      if (hasConnection == true) {
+        startService();
+      }
+    });
   }
 
   void startService() {
-    locationService = LocationService();
     getLocationWeather();
     getDegreePref();
     getAirQualityPref();
@@ -63,6 +70,7 @@ class WeatherProvider with ChangeNotifier {
 
   void getLocationWeather({String? location}) async {
     isLoading = true;
+    notifyListeners();
     if (location == null) {
       await locationService!.getCoordinates().then((value) {
         location = value;
@@ -74,12 +82,18 @@ class WeatherProvider with ChangeNotifier {
         .then((value) => weather = value)
         .whenComplete(() {
       isLoading = false;
-      setHourList();
-      addLocation();
-      if (searchList!.length > 1) {
-        showSnack(weather!);
+      if (weather == null) {
+        hasError = true;
+        showSnack("Location not found!");
+        notifyListeners();
+      } else {
+        setHourList();
+        addLocation();
+        if (searchList!.length > 1) {
+          showSnack("Location changed to ${weather!.location!.name}");
+        }
+        notifyListeners();
       }
-      notifyListeners();
     });
   }
 
@@ -112,7 +126,7 @@ class WeatherProvider with ChangeNotifier {
     weather = searchList!.firstWhere((element) => element == w);
     setHourList();
     if (searchList!.length > 1) {
-      showSnack(weather!);
+      showSnack("Location changed to ${weather!.location!.name}");
     }
     notifyListeners();
   }
@@ -125,11 +139,11 @@ class WeatherProvider with ChangeNotifier {
     }
   }
 
-  void showSnack(Weather weather) {
+  void showSnack(String message) {
     final snackBar = SnackBar(
         backgroundColor: Color.fromARGB(255, 9, 11, 120),
         duration: Duration(milliseconds: 2000),
-        content: Text("Location changed to ${weather.location!.name}"));
+        content: Text(message));
     ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
         .showSnackBar(snackBar);
   }

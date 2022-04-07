@@ -11,41 +11,44 @@ class ForecastDayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8),
+    return Card(
       margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          color: Color.fromARGB(255, 16, 18, 48),
-          borderRadius: BorderRadius.circular(10)
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              Text(forecastDay.date.toString(),
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400)),
-              Text("Day",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400))
-            ],
-          ),
-          Consumer<WeatherProvider>(
-            builder: (context, provider, child) {
-              return Text(provider.isFarenheit! ? "${forecastDay.day!.avgtempF!.round()}ºF":"${forecastDay.day!.avgtempC!.round()}ºC",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400));
-            },
-          ),
-          WeatherIcon(forecastDay.day!.condition, true, 0.8)
-        ],
+      color: Color.fromARGB(255, 16, 18, 48),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(forecastDay.date.toString(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400)),
+                Text("Day",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400))
+              ],
+            ),
+            Consumer<WeatherProvider>(
+              builder: (context, provider, child) {
+                return Text(
+                    provider.isFarenheit!
+                        ? "${forecastDay.day!.avgtempF!.round()}ºF"
+                        : "${forecastDay.day!.avgtempC!.round()}ºC",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w400));
+              },
+            ),
+            WeatherIcon(forecastDay.day!.condition, true, 0.8)
+          ],
+        ),
       ),
     );
   }
