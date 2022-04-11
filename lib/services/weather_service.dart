@@ -8,7 +8,7 @@ import 'package:weather_app/models/weather.dart';
 
 class WeatherService {
   final String urlBase = "http://api.weatherapi.com/v1/forecast.json?key=";
-  final String key = "4611193cd03d47fb977132900222201";
+  final String key = "your token here";
 
   Future<dynamic> getHttp(String city, int days) async {
     String request = "$urlBase$key&q=$city&days=$days&aqi=yes&alerts=yes";
