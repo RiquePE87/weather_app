@@ -12,12 +12,16 @@ class InfoCard extends StatelessWidget {
       direction: Axis.horizontal,
       alignment: WrapAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 6, left: 6),
-          child: Image.asset(
-            image,
-            scale: 7,
-          ),
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 6, left: 6),
+              child: Image.asset(
+                image,
+                scale: 7,
+              ),
+            ),
+          ],
         ),
         Column(
             crossAxisAlignment: CrossAxisAlignment.start,
